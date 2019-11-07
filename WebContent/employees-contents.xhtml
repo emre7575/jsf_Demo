@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+      
+      <div align="center">
+		<br/>
+		<h:outputText value="Employees list" styleClass="contentsTitle"></h:outputText> 
+	 
+	 		<h:form>
+			 	<h:dataTable value = "#{backingEmployees.findAllEmployees()}" var = "employee"
+		   			styleClass = "table"
+		   			headerClass = "table-header"
+		   			rowClasses = "table-odd-row,table-even-row">
+		   
+				   <h:column>    				
+				      <f:facet name = "header">Id</f:facet>    				
+				      #{employee.id}
+				   </h:column>
+				   
+				   <h:column>    				
+				      <f:facet name = "header">First Name</f:facet>    				
+				      #{employee.firstName}
+				   </h:column>
+				   
+				   <h:column>    				
+				      <f:facet name = "header">Last Name</f:facet>    				
+				      #{employee.lastName}
+				   </h:column>
+				   
+				   <h:column>    				
+				      <f:facet name = "header">Company</f:facet>    				
+				      #{employee.company}
+				   </h:column>
+				   
+				   <h:column>    				
+				      <f:facet name = "header">Employee Number</f:facet>    				
+				      #{employee.emplNumber}
+				   </h:column>
+				   
+				   <h:column>    				
+				      <f:facet name = "header">Salary</f:facet>    				
+				      <h:outputText value="#{employee.salary}">
+				      
+				      	<f:convertNumber currencySymbol="$" type="currency"/>
+				      </h:outputText>
+				   </h:column>
+				   
+				   <f:facet name="footer">
+				   		<h:outputText value="Total of employees: #{backingEmployees.findAllEmployees().size()}"></h:outputText>
+				   </f:facet>
+		 
+				</h:dataTable>
+				<br />
+				<h:commandButton  value="Add employee" action="add-employee" />
+			</h:form>
+	 </div>
+     <br/>
+</ui:composition>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+      
+    <div align="center">
+    	<br />
+    	<h:outputText value="Add new employee" styleClass="contentsTitle"></h:outputText>
+    	<f:event listener="#{backingAddEmployee.init()}" type="preRenderView"></f:event>
+    	<br /><br />
+    	<h:form>
+    		<h:panelGrid columns="2">
+    			First name:
+    			<h:inputText id="firstName" value="#{backingAddEmployee.employee.firstName}"
+    			required="true" requiredMessage="First name cannot be emty"/>
+    			
+    			Last name:
+    			<h:inputText id="lastName" value="#{backingAddEmployee.employee.lastName}"
+    			required="true" requiredMessage="Last name cannot be emty"/>
+    			
+    			Company:
+    				<h:selectOneMenu value="#{backingAddEmployee.employee.company}">
+    					<f:selectItems value="#{backingAddEmployee.companiesList}"
+    					var="company"
+    					itemValue="#{company.name}"
+    					itemLabel="#{company.name}"
+    					noSelectionOption=""
+    					/>
+    				</h:selectOneMenu>
+    			
+    			
+    			Employee number:
+    			<h:inputText 
+    			id="emplNumber"
+    			validatorMessage="Employee number must be of 5 chars"
+    			value="#{backingAddEmployee.employee.emplNumber}">
+    					<f:validateLength minimum="5" maximum="5"></f:validateLength>
+    			</h:inputText>
+    				
+    			Salary($):
+    			<h:inputText value="#{backingAddEmployee.employee.salary}">
+    			
+    			</h:inputText>
+    		</h:panelGrid>
+    		<div align="center">
+    			<h:message for="firstName" style="color:red"/>
+    			<h:message for="lastName" style="color:red"/>
+    			<h:message for="emplNumber" style="color:red"/>
+    		</div>
+    		<div align="center">
+    			<h:commandButton action="employees" value="Cancel" immediate="true" />
+    			<h:commandButton action="#{backingAddEmployee.saveEmployee()}" value="Save" />
+    		</div>
+    	</h:form>
+    </div>
+</ui:composition>
